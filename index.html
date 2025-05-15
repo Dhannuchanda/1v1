@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>1v1 Chat</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Welcome to 1v1 Chat</h1>
+    <button onclick="startChat('random')">Random Chat</button>
+    <button onclick="startChat('private')">Private Chat</button>
+  </div>
+
+  <script>
+    function startChat(mode) {
+      if (mode === 'random') {
+        const username = prompt('Enter your name:');
+        window.location.href = `chat.html?mode=random&username=${encodeURIComponent(username)}`;
+      } else {
+        const username = prompt('Enter your name:');
+        const pin = prompt('Enter a 4-digit PIN:');
+        window.location.href = `chat.html?mode=private&username=${encodeURIComponent(username)}&pin=${pin}`;
+      }
+    }
+  </script>
+</body>
+</html>
