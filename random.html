@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head><title>Random 1v1 Chat</title></head>
+<body>
+  <h2>Random 1v1 Chat</h2>
+  <p id="status">Connecting...</p>
+  <textarea id="chatbox" rows="10" cols="50" readonly></textarea><br>
+  <input type="text" id="msg" oninput="typing()" />
+  <button onclick="send()">Send</button>
+
+  <script>
+    const ws = new WebSocket("ws://" + location.host + "/ws/random");
+    ws.onopen = () => document.getElementById("status").innerText = "Connected!";
+    ws.onmessage = (e) => document.getElementById("chatbox").value += "\\n" + e.data;
+    ws.onclose = () => document.getElementById("status").innerText = "Disconnected";
+
+    function send() {
+      const input = document.getElementById("msg");
+      ws.send(input.value);
+      input.value = "";
+    }
+
+    function typing() {
+      ws.send("__typing__");
+    }
+  </script>
+</body>
+</html>
